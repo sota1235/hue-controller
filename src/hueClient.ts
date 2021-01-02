@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 
-type HueResponse = Record<string, any>[];
+type HueResponse = Record<string, any>[] | Record<string, any>;
 
 class HueHTTPClient {
   private defaultHeaders: HeadersInit = {};
@@ -95,6 +95,10 @@ class HueHTTPClient {
   }
 
   private checkError(res: HueResponse): void {
+    if (!(res instanceof Array)) {
+      return;
+    }
+
     if (Object.keys(res[0])[0] === 'error') {
       throw new Error(JSON.stringify(res[0].error));
     }

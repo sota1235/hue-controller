@@ -1,4 +1,4 @@
-declare type HueResponse = Record<string, any>[];
+declare type HueResponse = Record<string, any>[] | Record<string, any>;
 declare class HueHTTPClient {
     private defaultHeaders;
     private baseURL;

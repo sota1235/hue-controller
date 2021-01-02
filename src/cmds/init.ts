@@ -19,9 +19,9 @@ export const initCommand: CommandModule<Record<string, any>, Options> = {
   },
   handler(argv) {
     (async () => {
-      const data = await hueClient.post('/api', {
+      const data = (await hueClient.post('/api', {
         devicetype: argv.user,
-      });
+      })) as Record<string, any>[]; // todo correct type
 
       const { username } = data[0].success;
 
