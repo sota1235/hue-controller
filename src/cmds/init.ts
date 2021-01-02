@@ -17,17 +17,19 @@ export const initCommand: CommandModule<Record<string, any>, Options> = {
       type: 'string',
     },
   },
-  async handler(argv) {
-    const data = await hueClient.post('/api', {
-      devicetype: argv.user,
-    });
+  handler(argv) {
+    (async () => {
+      const data = await hueClient.post('/api', {
+        devicetype: argv.user,
+      });
 
-    const { username } = data[0].success;
+      const { username } = data[0].success;
 
-    write({
-      username,
-    });
+      write({
+        username,
+      });
 
-    console.log(`Initialization succeeded! username: ${username}`);
+      console.log(`Initialization succeeded! username: ${username}`);
+    })();
   },
 };
