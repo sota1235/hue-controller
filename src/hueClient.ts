@@ -54,6 +54,25 @@ class HueHTTPClient {
     return body;
   }
 
+  async put(path: string, params: any = {}): Promise<HueResponse> {
+    const requestOption: RequestInit = {
+      method: 'PUT',
+      headers: Object.assign({}, this.defaultHeaders, {
+        'Content-Type': 'application/json',
+      }),
+      credentials: 'omit',
+    };
+
+    requestOption.body = JSON.stringify(params);
+
+    const res = await fetch(`${this.baseURL}${path}`, requestOption);
+    const body = await res.json();
+
+    this.checkError(body);
+
+    return body;
+  }
+
   async delete(path: string): Promise<HueResponse> {
     const requestOption: RequestInit = {
       method: 'DELETE',

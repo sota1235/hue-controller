@@ -4,6 +4,7 @@ declare class HueHTTPClient {
     private baseURL;
     get(path: string, params?: Record<string, any>): Promise<HueResponse>;
     post(path: string, params?: any): Promise<HueResponse>;
+    put(path: string, params?: any): Promise<HueResponse>;
     delete(path: string): Promise<HueResponse>;
     setBaseURL(baseURL: string): void;
     private checkError;
