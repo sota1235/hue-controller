@@ -1,4 +1,6 @@
 import { CommandModule } from 'yargs';
+import hueClient from '../hueClient';
+import { write } from '../repository';
 
 type Options = {
   user: string;
@@ -15,7 +17,17 @@ export const initCommand: CommandModule<Record<string, any>, Options> = {
       type: 'string',
     },
   },
-  handler(argv) {
-    console.log(argv);
+  async handler(argv) {
+    const data = await hueClient.post('/api', {
+      devicetype: argv.user,
+    });
+
+    const { username } = data[0].success;
+
+    write({
+      username,
+    });
+
+    console.log(`Initialization succeeded! username: ${username}`);
   },
 };
