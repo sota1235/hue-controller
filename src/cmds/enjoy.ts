@@ -2,18 +2,18 @@ import { CommandModule } from 'yargs';
 import hueClient from '../hueClient';
 import { read } from '../repository';
 
-export const workCommand: CommandModule = {
-  command: 'work',
-  describe: 'change mode for working',
+export const enjoyCommand: CommandModule = {
+  command: 'enjoy',
+  describe: 'change mode for private time',
   builder: {},
   handler() {
     (async () => {
       const username = read('username');
       await hueClient.put(`/api/${username}/groups/2/action`, {
-        scene: 'K5bJChUt9RdCic6',
+        scene: 'Ur0ChCrOcgefG06',
       });
 
-      console.log(`Time to work💪`);
+      console.log(`Time to enjoy your time☕️`);
     })();
   },
 };
